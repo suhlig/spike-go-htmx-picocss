@@ -19,12 +19,7 @@ var page *template.Template
 var content embed.FS
 
 func init() {
-	var err error
-	page, err = template.New("default.html.tmpl").ParseFS(content, "*.html.tmpl")
-
-	if err != nil {
-		panic(err)
-	}
+	page = template.Must(template.New("").ParseFS(content, "*.html.tmpl"))
 }
 
 func handleRequest(w http.ResponseWriter, r *http.Request) {
