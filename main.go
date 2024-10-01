@@ -36,6 +36,8 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 		templateName = "default.html.tmpl"
 	}
 
+	w.Header().Set("Content-Type", "text/html")
+
 	err := page.ExecuteTemplate(w, templateName, map[string]int{
 		"counter": counter,
 		"next":    counter + 1,
