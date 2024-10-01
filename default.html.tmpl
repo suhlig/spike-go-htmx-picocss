@@ -1,26 +1,39 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <script src="https://unpkg.com/htmx.org"></script>
-  <link rel="stylesheet" href="https://unpkg.com/missing.css"/>
-  <title>Template Fragment Example</title>
-</head>
-<body>
-  <h1>Template Fragment Example</h1>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Template Fragment Example</title>
+    <meta name="description" content="A class-less example, without dependencies." />
+    <script src="https://unpkg.com/htmx.org"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css" />
+  </head>
 
-  <p>This page demonstrates how to create and serve
-  <a href="https://htmx.org/essays/template-fragments/">template fragments</a>
-  using the <a href="https://pkg.go.dev/text/template">built-in template package</a> in Go.</p>
+  <body>
+    <header>
+      <hgroup>
+        <h1>Template Fragment Example</h1>
+        <p>Some tag line</p>
+      </hgroup>
+    </header>
 
-  <p>This is accomplished by using the "block" action in the template, which lets you
-  define and execute a sub-template in a single step.</p>
+    <main>
+      <p>This page demonstrates how to create and serve <a href="https://htmx.org/essays/template-fragments/">template fragments</a> using the <a href="https://pkg.go.dev/text/template">built-in template package</a> in Go.</p>
+      <p>This is accomplished by using the "block" action in the template, which lets you define and execute a sub-template in a single step.</p>
 
-  <!-- Here's the fragment.  We can target it by executing the "buttonOnly" template. -->
-  {{block "buttonOnly" .}}
-    <button hx-get="/?counter={{.next}}&template=buttonOnly" hx-swap="outerHTML">
-      This Button Has Been Clicked {{.counter}} Times
-    </button>
-  {{end}}
+      <!-- Here's the fragment.  We can target it by executing the "buttonOnly" template. -->
+      {{ block "buttonOnly" . }}
+        <button hx-get="/?counter={{ .next }}&template=buttonOnly" hx-swap="outerHTML">
+          This Button Has Been Clicked {{ .counter }} Times
+        </button>
+      {{ end }}
+    </main>
 
-</body>
+    <footer>
+      <small
+        >Built with <a href="https://picocss.com">Pico</a>, HTMX and Go.
+      </small>
+    </footer>
+  </body>
 </html>

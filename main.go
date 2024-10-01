@@ -2,15 +2,20 @@ package main
 
 import (
 	"embed"
+	"fmt"
 	"html/template"
 	"net/http"
+	"os"
 	"strconv"
 )
 
 // main is the entry point for the program. It sets up and executes the HTTP server.
 func main() {
 	http.HandleFunc("/", handleRequest)
-	http.ListenAndServe(":80", nil)
+
+	fmt.Fprintln(os.Stderr, "Starting up")
+
+	http.ListenAndServe("localhost:8080", nil)
 }
 
 var page *template.Template
