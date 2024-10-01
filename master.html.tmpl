@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>{{ block "title" . }} default title {{ end }}</title>
+    <meta name="description" content="A class-less example, without dependencies." />
+    {{ block "head" . }}{{ end -}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css" />
+  </head>
+
+  <body>
+    <header>
+      <hgroup>
+        <h1>{{ template "title" . }}</h1>
+        <p>Some tag line</p>
+      </hgroup>
+      <nav>
+        <ul>
+          <li><a href="/counter">Counter</a></li>
+          <li><a href="/foo">Foo</a></li>
+          <li><a href="/bar">Bar</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      {{ block "main" . }}
+      default main content
+      {{ end }}
+    </main>
+
+    <footer>
+      <small
+        >Built with <a href="https://picocss.com">Pico</a>, HTMX and Go.
+      </small>
+    </footer>
+  </body>
+</html>

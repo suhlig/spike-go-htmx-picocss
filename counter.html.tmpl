@@ -1,0 +1,18 @@
+{{ define "head" }}
+<script src="https://unpkg.com/htmx.org"></script>
+{{ end }}
+
+{{ define "title" }}Counter{{ end }}
+
+{{ define "main" }}
+
+<p>This page demonstrates how to create and serve <a href="https://htmx.org/essays/template-fragments/">template fragments</a> using the <a href="https://pkg.go.dev/text/template">built-in template package</a> in Go.</p>
+<p>This is accomplished by using the "block" action in the template, which lets you define and execute a sub-template in a single step.</p>
+
+  {{ block "buttonOnly" . }}
+    <button hx-get="/counter?count={{ .next }}&block=buttonOnly" hx-swap="outerHTML">
+      This Button Has Been Clicked {{ .count }} Times
+    </button>
+  {{ end }}
+
+{{ end }}

@@ -1,46 +1,31 @@
 package main
 
 import (
-	"embed"
 	"fmt"
-	"html/template"
 	"net/http"
 	"os"
-	"strconv"
 )
 
 func main() {
-	http.HandleFunc("/", handleRequest)
-	fmt.Fprintln(os.Stderr, "Starting up")
-	http.ListenAndServe("localhost:8080", nil)
-}
-
-var page *template.Template
-
-//go:embed *.html.tmpl
-var content embed.FS
-
-func init() {
-	page = template.Must(template.New("").ParseFS(content, "*.html.tmpl"))
-}
-
-func handleRequest(w http.ResponseWriter, r *http.Request) {
-	counter, _ := strconv.Atoi(r.URL.Query().Get("counter"))
-
-	templateName := r.URL.Query().Get("template")
-
-	if templateName == "" {
-		templateName = "default.html.tmpl"
-	}
-
-	w.Header().Set("Content-Type", "text/html")
-
-	err := page.ExecuteTemplate(w, templateName, map[string]int{
-		"counter": counter,
-		"next":    counter + 1,
-	})
+	err := mainE()
 
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		fmt.Fprintf(os.Stderr, "Error %s\n", err)
+		os.Exit(1)
 	}
+}
+
+func mainE() error {
+	s, err := NewServer()
+
+	if err != nil {
+		return err
+	}
+
+	http.HandleFunc("/counter", s.handleCounter)
+	http.HandleFunc("/foo", s.handleFoo)
+	http.HandleFunc("/bar", s.handleBar)
+
+	fmt.Fprintln(os.Stderr, "Starting up")
+	return http.ListenAndServe("localhost:8080", nil)
 }
