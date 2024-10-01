@@ -22,7 +22,7 @@ func mainE() error {
 		return err
 	}
 
-	http.HandleFunc("/counter", s.handleCounter)
+	http.HandleFunc("/", s.handleRoot)
 	http.HandleFunc("/foo", s.handleFoo)
 	http.HandleFunc("/bar", s.handleBar)
 

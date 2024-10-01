@@ -51,7 +51,7 @@ func NewServer() (*server, error) {
 	return &s, nil
 }
 
-func (s *server) handleCounter(w http.ResponseWriter, r *http.Request) {
+func (s *server) handleRoot(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 
 	var (

@@ -10,7 +10,7 @@
 <p>This is accomplished by using the "block" action in the template, which lets you define and execute a sub-template in a single step.</p>
 
   {{ block "buttonOnly" . }}
-    <button hx-get="/counter?count={{ .next }}&block=buttonOnly" hx-swap="outerHTML">
+    <button hx-get="/?count={{ .next }}&block=buttonOnly" hx-swap="outerHTML">
       This Button Has Been Clicked {{ .count }} Times
     </button>
   {{ end }}
