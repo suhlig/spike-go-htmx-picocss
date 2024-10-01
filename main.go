@@ -9,12 +9,9 @@ import (
 	"strconv"
 )
 
-// main is the entry point for the program. It sets up and executes the HTTP server.
 func main() {
 	http.HandleFunc("/", handleRequest)
-
 	fmt.Fprintln(os.Stderr, "Starting up")
-
 	http.ListenAndServe("localhost:8080", nil)
 }
 
